@@ -1,61 +1,13 @@
-//How to use useState hook with a callback function:
-
-import React, {useCallback, useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import Button from './Button'
-import Text from './Text';
-
+import Text from './Text'
+import Timer from './Timer'
 const App = () => {
-
-    //whenever you want to change anything inside JSX, you have to put that inside state variable.
-    //That's why we use useState hook.
-    const[message, setMessage] = useState("Hello user, it's morning");
-
-    const changeMessage = useCallback(() => {
-        console.log("function clicked");
-
-        //we use callback function if we want to make use of the prev data as well
-        setMessage((prevData) => {
-            console.log("previous data is:", prevData);
-            return "Hello user, it's afternoon" ;
-        });
-    })
-    console.log(message);
-
-    return(
-        <>
-        <div>{message}</div>
-        <Button clickAction={changeMessage}>Change Message</Button>
-        </>
-    )
+    const [showTimer, toggleTimer] = useState(true)
+    return <>
+    {showTimer && <Timer customText="this is a good clock"/>}
+    <button onClick={() => toggleTimer(!showTimer)}>Toggle Timer from app</button>
+    </>
 }
 
 export default App
-
-
-// //How to use useState hook:
-
-// import React, {useState} from 'react';
-// import Button from './Button'
-// import Text from './Text';
-
-// const App = () => {
-
-//     //whenever you want to change anything inside JSX, you have to put that inside state variable.
-//     //That's why we use useState hook.
-//     const[message, setMessage] = useState("Hello user, it's morning");
-
-//     const changeMessage = () => {
-//         console.log("function clicked");
-//         setMessage("Hello user, it's afternoon");
-//     }
-//     console.log(message);
-
-//     return(
-//         <>
-//         <div>{message}</div>
-//         <button onClick={changeMessage}>Change Message</button>
-//         </>
-//     )
-// }
-
-// export default App
