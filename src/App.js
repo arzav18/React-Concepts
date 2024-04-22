@@ -1,28 +1,60 @@
-import React, {useState} from 'react';
+//How to use useState hook with a callback function:
+
+import React, {useCallback, useState} from 'react';
 import Button from './Button'
 import Text from './Text';
 
 const App = () => {
-    const [data, setData] = useState(    [
-        {id: 'a', text: 'text 1'},
-        {id: 'b', text: 'text 2'},
-        {id: 'c', text: 'text 3'},
-        {id: 'd', text: 'text 4'},
-        {id: 'e', text: 'text 5'},
-    ])
 
-    const addMoreData = () => {
-        setData((prevData) => [{id: 'f', text: 'text 6'}, ...prevData])
-    }
+    //whenever you want to change anything inside JSX, you have to put that inside state variable.
+    //That's why we use useState hook.
+    const[message, setMessage] = useState("Hello user, it's morning");
 
-    //We need keys because when we are rendering similar items in an array, react has to know which item was updated.
-    //Here, index acts as a key,but we should never use index in case of dynamic data, we can use it in static.
+    const changeMessage = useCallback(() => {
+        console.log("function clicked");
+
+        //we use callback function if we want to make use of the prev data as well
+        setMessage((prevData) => {
+            console.log("previous data is:", prevData);
+            return "Hello user, it's afternoon" ;
+        });
+    })
+    console.log(message);
+
     return(
         <>
-        {data.map((item, index) => <Text key={item.id}>{item.text}</Text>)}
-        <Button clickAction = {addMoreData}> Add more data </Button>
+        <div>{message}</div>
+        <Button clickAction={changeMessage}>Change Message</Button>
         </>
     )
 }
 
 export default App
+
+// //How to use useState hook:
+
+// import React, {useState} from 'react';
+// import Button from './Button'
+// import Text from './Text';
+
+// const App = () => {
+
+//     //whenever you want to change anything inside JSX, you have to put that inside state variable.
+//     //That's why we use useState hook.
+//     const[message, setMessage] = useState("Hello user, it's morning");
+
+//     const changeMessage = () => {
+//         console.log("function clicked");
+//         setMessage("Hello user, it's afternoon");
+//     }
+//     console.log(message);
+
+//     return(
+//         <>
+//         <div>{message}</div>
+//         <button onClick={changeMessage}>Change Message</button>
+//         </>
+//     )
+// }
+
+// export default App

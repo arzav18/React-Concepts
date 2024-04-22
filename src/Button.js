@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 //Whatever we pass inside a component becomes a children of the component
-const Button = (props) => {
+const Button = memo((props) => {
     console.log(props)
     const {children, clickAction, data} = props
     const handleClick = () => {
@@ -12,6 +12,6 @@ const Button = (props) => {
         + 
         {data?.a?.b?.c}
         </button>
-}
+})
 
 export default Button;
