@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 const Timer = (props) => {
     const {customText} = props
     const [counter, setCounter] = useState(0)
@@ -9,8 +9,6 @@ const Timer = (props) => {
             setCounter((prevCounter) => prevCounter + 1)
         }, 1000)
         console.log("creater interval with id ", interval)
-
-        //cleanUp functions run for every useEffect even if it does or does not contain a dependency array.
         return () => {
             console.log("i was unmounted")
             console.log("removing interval with id ", interval)
@@ -33,6 +31,12 @@ const Timer = (props) => {
             console.log("cleaning up 3rd effect for customText")
         }
     })
+
+    // useLayoutEffect runs before the useEffect hook and is used when some calculation needs to be done before
+    // re-rendering the screen
+    useLayoutEffect(() => {
+        console.log("running useLayoutEffect")
+    }, [])
     return <>
     <span>Current time is: {counter}</span>
     <br/>
