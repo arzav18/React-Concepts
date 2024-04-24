@@ -4,39 +4,21 @@ import Text from './Text'
 import Timer from './Timer'
 import ButtonWithTooltip from './ButtonWithTooltip'
 import Input from './Input'
+import SecondParent from './SecondParent';
+
 const App = () => {
-    let myLocal = 0
-    console.log("myLocal", myLocal)
-
-    //useRef is a hook that allows you to reference a value that's not needed for rendering.
-    //It stores the initial value
-    const ref = useRef(0)
-    const [myCount, setCount] = useState(0)
-    console.log("ref.current", ref.current)
-
-    const inputRef = useRef(null)
-
-    return <>
-      <button onClick={() => {myLocal+= 1}}>Change local variable</button>
-      <button onClick={() => {ref.current += 1}}>Change ref</button>
-      <button onClick={() => {setCount((prevCount) => prevCount + 1)}}>Change state</button>
-
-      <div>
-        <span>Local var: {myLocal}</span><br/>
-        <span>ref: {ref.current}</span><br/>
-        <span>state variable: {myCount}</span><br/>
-      </div>
-
-      <h4>Timer example</h4>
-      <Timer>This is my timer</Timer>
-
-      <h4>DOM example</h4>
-      <Input ref={inputRef} />
-      <button onClick={() => {
-        console.log(inputRef.current.getBoundingClientRect())
-        if (inputRef.current) inputRef.current.focus()
-      }}>Focus the inputbox</button>
+  const[count, setCount] = useState(0);
+  const handleClick = () => {
+    setCount((prev) => prev+1)
+    console.log("I am a parent")
+  }
+    return(
+    <>
+    Outer most parent : {count} <button onClick = {handleClick}>count++</button>
+    <br/>
+    <SecondParent />
     </>
+    )
 }
 
 export default App
