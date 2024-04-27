@@ -9,18 +9,16 @@ import PrintTable from './PrintTable'
 import Heading from './Heading';
 import { themeContext } from './context';
 import Navbar from './Navbar';
+import { createPortal } from 'react-dom';
 
 const App = () => {
 
-  //createContext lets you create a context that components can provide or read.
-  //context lets a parent component provide data to the entire tree below it.
-
-  const [theme, setTheme] = useState();
+//createPortal lets you render some children into a different part of the DOM.
+  const [showModal, toggleModal] = useState(false);
 
     return <>
-    <themeContext.Provider value = {[theme, setTheme]}>
-      <Navbar />
-    </themeContext.Provider>
+    Hey I am inside root <button onclick = {() => toggleModal((prev) => !prev)}>Toggle Modal</button>
+    {showModal && createPortal(<div>This is a modal content</div>, document.body)}
     </>
 }
 
