@@ -1,16 +1,18 @@
-import React, {memo} from 'react';
+import React, {memo, useContext} from 'react';
+import { themeContext } from './context';
 
 //Whatever we pass inside a component becomes a children of the component
 const Button = memo((props) => {
-    console.log(props)
-    const {children, clickAction, data} = props
+    const {children, clickAction} = props
+    const [theme, setTheme] = useContext(themeContext)
     const handleClick = () => {
         clickAction?.()
+        setTheme((prev) => {
+            return prev === 'dark' ? 'light' : 'dark' 
+        })
     }
     return <button onClick={handleClick}>
-        {children}
-        + 
-        {data?.a?.b?.c}
+        {children} {theme}
         </button>
 })
 

@@ -6,27 +6,21 @@ import ButtonWithTooltip from './ButtonWithTooltip'
 import Input from './Input'
 import SecondParent from './SecondParent'
 import PrintTable from './PrintTable'
-
-//lazy lets you defer loading component's code until it is rendered for the first time.
-//Suspense allows you to suspend rendering while data is being fetched and renders when data is fetched.
-const Text = lazy(()=> delayForDemo(import('./Text.js')));
-
-async function delayForDemo(promise) {
-  await new Promise(resolve => {
-    setTimeout(resolve, 2000);
-  });
-  return promise;
-}
+import Heading from './Heading';
+import { themeContext } from './context';
+import Navbar from './Navbar';
 
 const App = () => {
-  const[showText, toggleText] = useState(false);
+
+  //createContext lets you create a context that components can provide or read.
+  //context lets a parent component provide data to the entire tree below it.
+
+  const [theme, setTheme] = useState();
 
     return <>
-    <button onClick={()=> {toggleText((prev) => !prev)}} >Toggle Text</button>
-    {showText && <Suspense fallback = {<div>I am loading</div>}>
-    <Text>Hello Guys!</Text>
-    </Suspense>}
-    
+    <themeContext.Provider value = {[theme, setTheme]}>
+      <Navbar />
+    </themeContext.Provider>
     </>
 }
 
