@@ -1,37 +1,17 @@
 import React from 'react';
-import { Routes, Route, Link, useParams} from 'react-router-dom';
-
-const Home = () => {
-  return <div>I am home</div>
-}
-
-const About = () => {
-  return <div>I am about</div>
-}
-
-const Contact = () => {
-  return <div>I am contact</div>
-}
-
-const Profile = () => {
-  const {userName} = useParams();
-  return <div>Hello User: {userName}</div>
-}
+import Comp1 from './Comp1';
+import Comp2 from './Comp2';
 
 const App = () => {
 
+//What is Higher Order Component(HOC)? => It receives a component, applies certain logic and then return
+//that component with those additional logics. withDimensions is HOC in this case.
 
     return <>
-    <Link to="/">Travel Home </Link>
-    <Link to="/about">Travel About </Link>
-    <Link to="/contact">Travel Contact </Link>
-    <Link to="/profile/arzav18">Travel Profile </Link>
-    <Routes>
-      <Route path = "/" element={<Home />} />
-      <Route path = "/about" element={<About />} />
-      <Route path = "/contact" element={<Contact />} />
-      <Route path = "/profile/:userName" element={<Profile />} />
-    </Routes>
+    <div>
+      <Comp1 />
+      <Comp2 />
+    </div>
     </>
 }
 
