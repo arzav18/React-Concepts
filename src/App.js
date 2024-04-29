@@ -1,16 +1,21 @@
 import React from 'react';
-import Comp1 from './Comp1';
-import Comp2 from './Comp2';
+import Input from './Input';
 
 const App = () => {
 
-//What is Higher Order Component(HOC)? => It receives a component, applies certain logic and then return
-//that component with those additional logics. withDimensions is HOC in this case.
+//Render Props: A prop in a component which is a function and returns a JSX.
+//When to use Render Props: 1) When we want to make the component customisable
+//2)Provide ability to theme the component according to their design system.
+
+const showValue = (value) =><>The value is {value}</>
+const showMultiply = (value) =><>The multiplied value is {value*10}</>
 
     return <>
     <div>
-      <Comp1 />
-      <Comp2 />
+      <Input renderTextBelow={showValue}/>
+      <br />
+      <br />
+      <Input renderTextBelow={showMultiply}/>
     </div>
     </>
 }
