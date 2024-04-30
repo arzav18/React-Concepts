@@ -16,7 +16,7 @@ const App = () => {
 
     return <>
     <h2>Welcome to Gallery</h2>
-    {photos && photos?.length ? photos.map((pic) => <img src={pic?.url} alt={pic?.title} />) : <span>Loading Images</span>}
+    {photos && photos?.length ? photos.map((pic) => <img src={pic?.url} loading='lazy' key={pic?.id} alt={pic?.title} height={200} width={200}  />) : <span>Loading Images</span>}
     </>
 }
 
