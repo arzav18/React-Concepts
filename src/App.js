@@ -1,17 +1,22 @@
-import React, {useState} from 'react';
-import HomePage from './HomePage';
-import ChatPage from './ChatPage';
+import React, {useEffect, useState} from 'react';
 
 const App = () => {
 
-  //Custom Hooks: Building your own Hooks lets you extract component logic into reusable functions.
+  const[photos, setPhotos] = useState()
+  useEffect(() => {
+    const fetchData = async() => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/photos');
+      const data = await response.json();
+      console.log(data);
+      setPhotos(data);
+    }
+
+    fetchData();
+  }, [])
 
     return <>
-    <div>
-      <HomePage />
-      <br />
-      <ChatPage />
-    </div>
+    <h2>Welcome to Gallery</h2>
+    {photos && photos?.length ? photos.map((pic) => <img src={pic?.url} alt={pic?.title} />) : <span>Loading Images</span>}
     </>
 }
 
